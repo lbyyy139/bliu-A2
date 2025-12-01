@@ -17,6 +17,7 @@ public class AssignmentTwo {
         assignment.partFourA();
         assignment.partFourB();
         assignment.partFive();
+        assignment.partSix();
     }
 
     public void partThree() {
@@ -140,6 +141,34 @@ public class AssignmentTwo {
         System.out.println("\nFinal ride history:");
         rollerCoaster.printRideHistory();
     }
-    public void partSix() {}
+    public void partSix() {
+        System.out.println("\n\n=== Part 6: Export to File ===");
+
+        Employee operator = new Employee("Tom Operator", 32, "tom@themepark.com", "EMP005", "Ride Operations");
+        Ride ride = new Ride("Pirate Ship", "Swing Ride", operator, 4);
+
+        Visitor visitor1 = new Visitor("Karen", 27, "karen@email.com", "V020", "Adult");
+        Visitor visitor2 = new Visitor("Liam", 15, "liam@email.com", "V021", "Child");
+        Visitor visitor3 = new Visitor("Mia", 33, "mia@email.com", "V022", "Adult");
+        Visitor visitor4 = new Visitor("Noah", 8, "noah@email.com", "V023", "Child");
+        Visitor visitor5 = new Visitor("Olivia", 29, "olivia@email.com", "V024", "Adult");
+
+        System.out.println("Adding visitors to ride history:");
+        ride.addVisitorToHistory(visitor1);
+        ride.addVisitorToHistory(visitor2);
+        ride.addVisitorToHistory(visitor3);
+        ride.addVisitorToHistory(visitor4);
+        ride.addVisitorToHistory(visitor5);
+
+        System.out.println("\nCurrent ride history:");
+        ride.printRideHistory();
+
+        System.out.println("\nExporting ride history to file...");
+        String filename = "bliu_ride_history.csv";
+        ride.exportRideHistory(filename);
+
+        System.out.println("\nAfter export - verifying data:");
+        ride.numberOfVisitors();
+    }
     public void partSeven() {}
 }

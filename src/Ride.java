@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Ride implements RideInterface {
     private String rideName;
@@ -143,5 +144,22 @@ public class Ride implements RideInterface {
 
         numOfCycles++;
         System.out.println("✅ Ride cycle completed. Total cycles run: " + numOfCycles);
+    }
+
+    public void exportRideHistory(String filename) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+            for (Visitor visitor : rideHistory) {
+                // 格式：姓名,年龄,邮箱,游客ID,票务类型
+                writer.println(visitor.getName() + "," +
+                        visitor.getAge() + "," +
+                        visitor.getEmail() + "," +
+                        visitor.getVisitorId() + "," +
+                        visitor.getTicketType());
+            }
+            System.out.println("💾 Ride history exported to " + filename + " successfully.");
+            System.out.println("📁 File location: " + new File(filename).getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("❌ Error exporting ride history: " + e.getMessage());
+        }
     }
 }
