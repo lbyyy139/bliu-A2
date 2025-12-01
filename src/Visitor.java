@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Visitor extends Person {
     private String visitorId;
     private String ticketType;
@@ -30,5 +32,21 @@ public class Visitor extends Person {
     public String toString() {
         return "Visitor{name='" + getName() + "', age=" + getAge() +
                 ", visitorId='" + visitorId + "', ticketType='" + ticketType + "'}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Visitor visitor = (Visitor) obj;
+        return Objects.equals(getName(), visitor.getName()) &&
+                getAge() == visitor.getAge() &&
+                Objects.equals(visitorId, visitor.visitorId) &&
+                Objects.equals(ticketType, visitor.ticketType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAge(), visitorId, ticketType);
     }
 }

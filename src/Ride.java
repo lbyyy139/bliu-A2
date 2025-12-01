@@ -162,4 +162,42 @@ public class Ride implements RideInterface {
             System.out.println("❌ Error exporting ride history: " + e.getMessage());
         }
     }
+
+    public void importRideHistory(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int importedCount = 0;
+
+            System.out.println("📥 Starting import from " + filename + "...");
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 5) {
+                    String name = parts[0];
+                    int age = Integer.parseInt(parts[1]);
+                    String email = parts[2];
+                    String visitorId = parts[3];
+                    String ticketType = parts[4];
+
+                    Visitor visitor = new Visitor(name, age, email, visitorId, ticketType);
+                    if (rideHistory.add(visitor)) {
+                        importedCount++;
+                        System.out.println("   ✅ Imported: " + name);
+                    }
+                } else {
+                    System.out.println("   ⚠️  Skipping invalid line: " + line);
+                }
+            }
+
+            System.out.println("📥 Import completed: " + importedCount + " visitors imported from " + filename);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("❌ File not found: " + filename);
+            System.out.println("💡 Make sure the file exists in the project directory.");
+        } catch (IOException e) {
+            System.out.println("❌ Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Error parsing age data: " + e.getMessage());
+        }
+    }
 }

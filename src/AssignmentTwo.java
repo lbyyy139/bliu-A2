@@ -18,6 +18,7 @@ public class AssignmentTwo {
         assignment.partFourB();
         assignment.partFive();
         assignment.partSix();
+        assignment.partSeven();
     }
 
     public void partThree() {
@@ -170,5 +171,27 @@ public class AssignmentTwo {
         System.out.println("\nAfter export - verifying data:");
         ride.numberOfVisitors();
     }
-    public void partSeven() {}
+    public void partSeven() {
+        System.out.println("\n\n=== Part 7: Import from File ===");
+
+        Employee operator = new Employee("Emma Operator", 31, "emma@themepark.com", "EMP006", "Ride Operations");
+        Ride ride = new Ride("Carousel", "Merry-Go-Round", operator, 8);
+
+        System.out.println("Before import:");
+        ride.numberOfVisitors();
+
+        System.out.println("\nImporting from file...");
+        String filename = "bliu_ride_history.csv";
+        ride.importRideHistory(filename);
+
+        System.out.println("\nAfter import:");
+        ride.numberOfVisitors();
+
+        System.out.println("\nImported ride history:");
+        ride.printRideHistory();
+
+        System.out.println("\nTesting search functionality:");
+        Visitor testVisitor = new Visitor("Karen", 27, "karen@email.com", "V020", "Adult");
+        ride.checkVisitorFromHistory(testVisitor);
+    }
 }
