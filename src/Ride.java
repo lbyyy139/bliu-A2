@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Ride {
+public class Ride implements RideInterface {
     private String rideName;
     private String rideType;
     private Employee operator;
@@ -45,5 +45,39 @@ public class Ride {
 
     public void setMaxRider(int maxRider) {
         this.maxRider = maxRider;
+    }
+
+    @Override
+    public void addVisitorToQueue(Visitor visitor) {
+    }
+
+    @Override
+    public void removeVisitorFromQueue() {
+    }
+
+    @Override
+    public void printQueue() {
+    }
+
+    @Override
+    public void addVisitorToHistory(Visitor visitor) {
+    }
+
+    @Override
+    public boolean checkVisitorFromHistory(Visitor visitor) {
+        return false;
+    }
+
+    @Override
+    public int numberOfVisitors() {
+        return 0;
+    }
+
+    @Override
+    public void printRideHistory() {
+    }
+
+    @Override
+    public void runOneCycle() {
     }
 }
