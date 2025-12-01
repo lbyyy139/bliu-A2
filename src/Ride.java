@@ -5,11 +5,15 @@ public class Ride implements RideInterface {
     private String rideType;
     private Employee operator;
     private int maxRider;
+    private int numOfCycles;
 
     private Queue<Visitor> waitingLine;
+    private LinkedList<Visitor> rideHistory;
 
     public Ride() {
         this.waitingLine = new LinkedList<>();
+        this.rideHistory = new LinkedList<>();
+        this.numOfCycles = 0;
     }
 
     public Ride(String rideName, String rideType, Employee operator, int maxRider) {
@@ -31,6 +35,8 @@ public class Ride implements RideInterface {
 
     public int getMaxRider() { return maxRider; }
     public void setMaxRider(int maxRider) { this.maxRider = maxRider; }
+
+    public int getNumOfCycles() { return numOfCycles; }
 
     @Override
     public void addVisitorToQueue(Visitor visitor) {
@@ -68,20 +74,47 @@ public class Ride implements RideInterface {
 
     @Override
     public void addVisitorToHistory(Visitor visitor) {
+        if (rideHistory.add(visitor)) {
+            System.out.println("✅ Visitor " + visitor.getName() + " added to ride history.");
+        } else {
+            System.out.println("❌ Failed to add visitor to ride history.");
+        }
     }
 
     @Override
     public boolean checkVisitorFromHistory(Visitor visitor) {
-        return false;
+        boolean found = rideHistory.contains(visitor);
+        System.out.println("🔍 Visitor " + visitor.getName() +
+                (found ? " found" : " not found") + " in ride history.");
+        return found;
     }
 
     @Override
     public int numberOfVisitors() {
-        return 0;
+        int count = rideHistory.size();
+        System.out.println("📊 Number of visitors in ride history: " + count);
+        return count;
     }
 
     @Override
     public void printRideHistory() {
+        if (rideHistory.isEmpty()) {
+            System.out.println("📭 Ride history is empty.");
+            return;
+        }
+
+        System.out.println("📖 Ride history (" + rideHistory.size() + " visitors):");
+        Iterator<Visitor> iterator = rideHistory.iterator();
+        int count = 1;
+        while (iterator.hasNext()) {
+            System.out.println("   " + count + ". " + iterator.next());
+            count++;
+        }
+    }
+
+    public void sortRideHistory(Comparator<Visitor> comparator) {
+        Collections.sort(rideHistory, comparator);
+        System.out.println("🔃 Ride history sorted successfully.");
     }
 
     @Override

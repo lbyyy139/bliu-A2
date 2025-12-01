@@ -14,6 +14,8 @@ public class AssignmentTwo {
 
         AssignmentTwo assignment = new AssignmentTwo();
         assignment.partThree();
+        assignment.partFourA();
+        assignment.partFourB();
     }
 
     public void partThree() {
@@ -46,8 +48,63 @@ public class AssignmentTwo {
         rollerCoaster.printQueue();
     }
 
-    public void partFourA() {}
-    public void partFourB() {}
+    public void partFourA() {
+        System.out.println("\n\n=== Part 4A: Ride History ===");
+
+        Employee operator = new Employee("Sarah Operator", 28, "sarah@themepark.com", "EMP002", "Ride Operations");
+        Ride waterRide = new Ride("Splash Mountain", "Water Ride", operator, 4);
+
+        Visitor visitor1 = new Visitor("Frank", 22, "frank@email.com", "V006", "Adult");
+        Visitor visitor2 = new Visitor("Grace", 19, "grace@email.com", "V007", "Student");
+        Visitor visitor3 = new Visitor("Henry", 45, "henry@email.com", "V008", "Adult");
+        Visitor visitor4 = new Visitor("Ivy", 32, "ivy@email.com", "V009", "Adult");
+        Visitor visitor5 = new Visitor("Jack", 10, "jack@email.com", "V010", "Child");
+
+        System.out.println("Adding visitors to ride history:");
+        waterRide.addVisitorToHistory(visitor1);
+        waterRide.addVisitorToHistory(visitor2);
+        waterRide.addVisitorToHistory(visitor3);
+        waterRide.addVisitorToHistory(visitor4);
+        waterRide.addVisitorToHistory(visitor5);
+
+        System.out.println("\nChecking visitor in history:");
+        waterRide.checkVisitorFromHistory(visitor1);
+
+        System.out.println("\nCounting visitors:");
+        waterRide.numberOfVisitors();
+
+        System.out.println("\nRide history:");
+        waterRide.printRideHistory();
+    }
+
+    public void partFourB() {
+        System.out.println("\n\n=== Part 4B: Sorting Ride History ===");
+
+        Employee operator = new Employee("Mike Operator", 35, "mike@themepark.com", "EMP003", "Ride Operations");
+        Ride ferrisWheel = new Ride("Sky Wheel", "Ferris Wheel", operator, 6);
+
+        Visitor visitor1 = new Visitor("Zack", 25, "zack@email.com", "V011", "Adult");
+        Visitor visitor2 = new Visitor("Alice", 30, "alice2@email.com", "V012", "Adult");
+        Visitor visitor3 = new Visitor("Charlie", 18, "charlie2@email.com", "V013", "Student");
+        Visitor visitor4 = new Visitor("Bob", 22, "bob2@email.com", "V014", "Adult");
+        Visitor visitor5 = new Visitor("Alice", 25, "alice3@email.com", "V015", "Adult");
+
+        System.out.println("Adding visitors to history:");
+        ferrisWheel.addVisitorToHistory(visitor1);
+        ferrisWheel.addVisitorToHistory(visitor2);
+        ferrisWheel.addVisitorToHistory(visitor3);
+        ferrisWheel.addVisitorToHistory(visitor4);
+        ferrisWheel.addVisitorToHistory(visitor5);
+
+        System.out.println("\nBefore sorting:");
+        ferrisWheel.printRideHistory();
+
+        System.out.println("\nSorting by name and age...");
+        ferrisWheel.sortRideHistory(new VisitorComparator());
+
+        System.out.println("\nAfter sorting:");
+        ferrisWheel.printRideHistory();
+    }
     public void partFive() {}
     public void partSix() {}
     public void partSeven() {}
