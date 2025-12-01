@@ -119,5 +119,29 @@ public class Ride implements RideInterface {
 
     @Override
     public void runOneCycle() {
+        if (operator == null) {
+            System.out.println("❌ Cannot run ride: No operator assigned.");
+            return;
+        }
+
+        if (waitingLine.isEmpty()) {
+            System.out.println("❌ Cannot run ride: No visitors in queue.");
+            return;
+        }
+
+        System.out.println("🎢 Running ride cycle for " + rideName + "...");
+        int ridersThisCycle = Math.min(maxRider, waitingLine.size());
+
+        System.out.println("Taking " + ridersThisCycle + " visitors from queue:");
+        for (int i = 0; i < ridersThisCycle; i++) {
+            Visitor rider = waitingLine.poll();
+            if (rider != null) {
+                addVisitorToHistory(rider);
+                System.out.println("   🎯 " + rider.getName() + " enjoyed the ride!");
+            }
+        }
+
+        numOfCycles++;
+        System.out.println("✅ Ride cycle completed. Total cycles run: " + numOfCycles);
     }
 }

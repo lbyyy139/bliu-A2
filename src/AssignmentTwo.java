@@ -16,6 +16,7 @@ public class AssignmentTwo {
         assignment.partThree();
         assignment.partFourA();
         assignment.partFourB();
+        assignment.partFive();
     }
 
     public void partThree() {
@@ -105,7 +106,40 @@ public class AssignmentTwo {
         System.out.println("\nAfter sorting:");
         ferrisWheel.printRideHistory();
     }
-    public void partFive() {}
+    public void partFive() {
+        System.out.println("\n\n=== Part 5: Running Ride Cycles ===");
+
+        Employee operator = new Employee("Lisa Operator", 29, "lisa@themepark.com", "EMP004", "Ride Operations");
+        Ride rollerCoaster = new Ride("Dragon Coaster", "Roller Coaster", operator, 3);
+
+        System.out.println("Creating 10 visitors and adding to queue:");
+        for (int i = 1; i <= 10; i++) {
+            Visitor visitor = new Visitor("Visitor" + i, 20 + i, "visitor" + i + "@email.com",
+                    "V" + (100 + i), "Adult");
+            rollerCoaster.addVisitorToQueue(visitor);
+        }
+
+        System.out.println("\nQueue before running cycle:");
+        rollerCoaster.printQueue();
+
+        System.out.println("\nRunning one ride cycle (max 3 visitors per cycle):");
+        rollerCoaster.runOneCycle();
+
+        System.out.println("\nQueue after running cycle:");
+        rollerCoaster.printQueue();
+
+        System.out.println("\nRide history after cycle:");
+        rollerCoaster.printRideHistory();
+
+        System.out.println("\nRunning second ride cycle:");
+        rollerCoaster.runOneCycle();
+
+        System.out.println("\nQueue after second cycle:");
+        rollerCoaster.printQueue();
+
+        System.out.println("\nFinal ride history:");
+        rollerCoaster.printRideHistory();
+    }
     public void partSix() {}
     public void partSeven() {}
 }
